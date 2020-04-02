@@ -17,6 +17,7 @@
 		DA1AEDA1243543A5003A8C0B /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AEDA0243543A5003A8C0B /* ComplicationController.swift */; };
 		DA1AEDA3243543A5003A8C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA1AEDA2243543A5003A8C0B /* Assets.xcassets */; };
 		DA1AEDA6243543A5003A8C0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA1AEDA5243543A5003A8C0B /* Preview Assets.xcassets */; };
+		DA1AEDB6243553FA003A8C0B /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AEDB5243553FA003A8C0B /* TestModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		DA1AEDA2243543A5003A8C0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA1AEDA5243543A5003A8C0B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DA1AEDA7243543A5003A8C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA1AEDB5243553FA003A8C0B /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				DA1AED9A243543A5003A8C0B /* ContentView.swift */,
+				DA1AEDB5243553FA003A8C0B /* TestModel.swift */,
 				DA1AED9C243543A5003A8C0B /* HostingController.swift */,
 				DA1AED9E243543A5003A8C0B /* ExtensionDelegate.swift */,
 				DA1AEDA0243543A5003A8C0B /* ComplicationController.swift */,
@@ -269,6 +272,7 @@
 			files = (
 				DA1AED9D243543A5003A8C0B /* HostingController.swift in Sources */,
 				DA1AEDA1243543A5003A8C0B /* ComplicationController.swift in Sources */,
+				DA1AEDB6243553FA003A8C0B /* TestModel.swift in Sources */,
 				DA1AED9B243543A5003A8C0B /* ContentView.swift in Sources */,
 				DA1AED9F243543A5003A8C0B /* ExtensionDelegate.swift in Sources */,
 			);
