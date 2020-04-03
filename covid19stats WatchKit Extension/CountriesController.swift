@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CountriesController: ObservableObject {
+final class CountriesController: ObservableObject {
     
     @Published var countries: [Country]
     @Published var namesOfCountries: [String]
@@ -29,7 +29,9 @@ class CountriesController: ObservableObject {
             country.updateStats()
             updatedCountries.append(country)
         }
-        self.countries = updatedCountries
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.countries = updatedCountries
+        }
     }
     
     public func addNewCountry(name: String) {

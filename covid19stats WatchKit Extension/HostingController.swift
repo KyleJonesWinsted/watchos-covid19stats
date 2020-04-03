@@ -10,9 +10,9 @@ import WatchKit
 import Foundation
 import SwiftUI
 
-class HostingController: WKHostingController<ContentView> {
-    override var body: ContentView {
+class HostingController: WKHostingController<AnyView> {
+    override var body: AnyView {
         let countriesController = CountriesController()
-        return ContentView(model: countriesController)
+        return AnyView(ContentView().environmentObject(countriesController))
     }
 }

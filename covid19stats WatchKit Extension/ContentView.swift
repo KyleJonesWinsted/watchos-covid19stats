@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var model: CountriesController
+    @EnvironmentObject var model: CountriesController
     @State var isDetailViewPresented = false
     
     var body: some View {
         List {
             ForEach(model.countries, id: \.id) { country in
-                NavigationLink(destination: CountryDetailView(model: self.model, country: country)) {
+                NavigationLink(destination: CountryDetailView(country: country).environmentObject(self.model)) {
                     VStack(alignment: .leading) {
                         Text(country.name)
                         Text(country.cases?.total.description ?? "--")
@@ -35,17 +35,17 @@ struct ContentView: View {
                 Text("Add Country")
             }
             .sheet(isPresented: self.$isDetailViewPresented) {
-                AddCountrySheet(model: self.model, isDetailViewPresented: self.$isDetailViewPresented)
+                AddCountrySheet(isDetailViewPresented: self.$isDetailViewPresented).environmentObject(self.model)
             }
         }
         .onAppear {
-            self.model.updateAllStats()
+            //self.model.updateAllStats()
         }
     }
 }
 
 struct CountryDetailView: View {
-    var model: CountriesController
+    @EnvironmentObject var model: CountriesController
     var country: Country
     
     var body: some View {
@@ -54,11 +54,14 @@ struct CountryDetailView: View {
             Text(country.cases?.total.description ?? "--")
         }
         .navigationBarTitle(country.name)
+        .onAppear {
+            self.model.updateAllStats()
+        }
     }
 }
 
 struct AddCountrySheet: View {
-    var model: CountriesController
+    @EnvironmentObject var model: CountriesController
     @Binding var isDetailViewPresented: Bool
     
     var body: some View {
