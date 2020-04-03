@@ -9,59 +9,70 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var testModel = TestModel()
+    @ObservedObject var model: CountriesController
     @State var isDetailViewPresented = false
     
     var body: some View {
         List {
-            ForEach(testModel.testCellNames, id: \.self) { cellName in
-                NavigationLink(destination: TestDetailView(text: cellName)) {
-                    Text(cellName)
+            ForEach(model.countries, id: \.id) { country in
+                NavigationLink(destination: CountryDetailView(model: self.model, country: country)) {
+                    VStack(alignment: .leading) {
+                        Text(country.name)
+                        Text(country.cases?.total.description ?? "--")
+                    }
                 }
             }
-            .onMove(perform: { self.testModel.testCellNames.move(fromOffsets: $0, toOffset: $1)})
-            .onDelete(perform: { self.testModel.testCellNames.remove(atOffsets: $0)})
+            .onMove(perform: { self.model.countries.move(fromOffsets: $0, toOffset: $1)})
+            .onDelete(perform: {
+                if self.model.countries[$0.first!].name != "All" {
+                    self.model.countries.remove(atOffsets: $0)
+                }
+            })
             
             Button(action: {
                 self.isDetailViewPresented = true
             }) {
-                Text("Show sheet")
+                Text("Add Country")
             }
             .sheet(isPresented: self.$isDetailViewPresented) {
-                TestSheet(text: "Hello", isDetailViewPresented: self.$isDetailViewPresented)
+                AddCountrySheet(model: self.model, isDetailViewPresented: self.$isDetailViewPresented)
             }
+        }
+        .onAppear {
+            self.model.updateAllStats()
         }
     }
 }
 
-struct TestDetailView: View {
-    var text: String
+struct CountryDetailView: View {
+    var model: CountriesController
+    var country: Country
     
     var body: some View {
-        Text(text)
-        .navigationBarTitle(text)
+        VStack {
+            Text(country.name)
+            Text(country.cases?.total.description ?? "--")
+        }
+        .navigationBarTitle(country.name)
     }
 }
 
-struct TestSheet: View {
-    var text: String
+struct AddCountrySheet: View {
+    var model: CountriesController
     @Binding var isDetailViewPresented: Bool
     
     var body: some View {
-        Button(action: {
-            self.isDetailViewPresented = false
-        }) {
-            Text(text)
+        List {
+            ForEach(model.namesOfCountries, id: \.self) { countryName in
+                Button(action: {
+                    self.model.addNewCountry(name: countryName)
+                    self.isDetailViewPresented = false
+                }) {
+                    Text(countryName)
+                }
+            }
         }
+        
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ContentView()
-            TestDetailView(text: "Hello")
-            TestSheet(text: "Hi Again", isDetailViewPresented: .constant(false))
-        }
-    }
-}

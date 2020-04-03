@@ -12,7 +12,7 @@ import SwiftUI
 
 class HostingController: WKHostingController<ContentView> {
     override var body: ContentView {
-        let testModel = TestModel()
-        return ContentView(testModel: testModel)
+        let countriesController = CountriesController()
+        return ContentView(model: countriesController)
     }
 }
