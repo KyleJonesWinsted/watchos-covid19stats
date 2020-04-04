@@ -15,9 +15,11 @@ struct Country {
     var cases: Cases?
     var deaths: Deaths?
     var updateTime: Date?
-    var fatalityRate: Int? {
-        guard self.deaths != nil && self.cases != nil else {return nil}
-        return self.deaths!.total / self.cases!.total
+    var formattedTime: String? {
+        guard let updateTime = self.updateTime else { return nil }
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        return formatter.string(from: updateTime)
     }
     
     public mutating func updateStats() {

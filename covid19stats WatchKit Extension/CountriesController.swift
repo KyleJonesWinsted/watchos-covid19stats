@@ -29,9 +29,7 @@ final class CountriesController: ObservableObject {
             country.updateStats()
             updatedCountries.append(country)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.countries = updatedCountries
-        }
+        self.countries = updatedCountries
     }
     
     public func addNewCountry(name: String) {

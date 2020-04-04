@@ -15,10 +15,11 @@ struct ContentView: View {
     var body: some View {
         List {
             ForEach(model.countries, id: \.id) { country in
-                NavigationLink(destination: CountryDetailView(country: country).environmentObject(self.model)) {
+                NavigationLink(destination: CountryDetailView(countryId: country.id).environmentObject(self.model)) {
                     VStack(alignment: .leading) {
                         Text(country.name)
                         Text(country.cases?.total.description ?? "--")
+                            .font(.title)
                     }
                 }
             }
@@ -32,31 +33,81 @@ struct ContentView: View {
             Button(action: {
                 self.isDetailViewPresented = true
             }) {
-                Text("Add Country")
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Add Country")
+                }
             }
-            .sheet(isPresented: self.$isDetailViewPresented) {
-                AddCountrySheet(isDetailViewPresented: self.$isDetailViewPresented).environmentObject(self.model)
-            }
+            
+            Text("Tap and hold to reorder countries in list. Swipe left to delete a country.")
+                .listRowPlatterColor(.clear)
+            
         }
         .onAppear {
-            //self.model.updateAllStats()
+            self.model.updateAllStats()
+        }
+        .sheet(isPresented: self.$isDetailViewPresented) {
+            AddCountrySheet(isDetailViewPresented: self.$isDetailViewPresented).environmentObject(self.model)
         }
     }
 }
 
 struct CountryDetailView: View {
     @EnvironmentObject var model: CountriesController
-    var country: Country
+    var countryId: UUID
+    var country: Country {
+        return self.model.countries.first(where: { $0.id == self.countryId })!
+    }
     
     var body: some View {
-        VStack {
-            Text(country.name)
-            Text(country.cases?.total.description ?? "--")
+        ScrollView {
+            HStack {
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        Text("Total Cases")
+                        Text(country.cases?.total.description ?? "--")
+                            .font(.largeTitle)
+                        Text("New Cases")
+                            .foregroundColor(.blue)
+                        Text(country.cases?.new ?? "--")
+                            .font(.title)
+                        Text("Active")
+                            .foregroundColor(.yellow)
+                        Text(country.cases?.active.description ?? "--")
+                            .font(.title)
+                        Text("Critical Condition")
+                            .foregroundColor(.orange)
+                        Text(country.cases?.critical.description ?? "--")
+                            .font(.title)
+                        Text("Recovered")
+                            .foregroundColor(.green)
+                        Text(country.cases?.recovered.description ?? "--")
+                            .font(.title)
+                    }
+                    VStack(alignment: .leading) {
+                        Text("Total Deaths")
+                            .foregroundColor(.red)
+                        Text(country.deaths?.total.description ?? "--")
+                            .font(.title)
+                        Text("New Deaths")
+                            .foregroundColor(.pink)
+                        Text(country.deaths?.new ?? "--")
+                            .font(.title)
+                    }
+                    Spacer()
+                }
+                .navigationBarTitle(country.name)
+                .onAppear {
+                    self.model.updateAllStats()
+                }
+                Spacer()
+            }
+            Text("Updated \(country.formattedTime ?? "never")")
         }
-        .navigationBarTitle(country.name)
-        .onAppear {
-            self.model.updateAllStats()
-        }
+    }
+    
+    func getCountry() {
+        return
     }
 }
 
@@ -76,6 +127,13 @@ struct AddCountrySheet: View {
             }
         }
         
+    }
+}
+
+struct CountryDetailPreview: PreviewProvider {
+    static var previews: some View {
+        let countriesController = CountriesController()
+        return CountryDetailView(countryId: countriesController.countries.first!.id).environmentObject(countriesController)
     }
 }
 
