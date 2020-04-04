@@ -12,7 +12,7 @@ struct CountryDetailView: View {
     @EnvironmentObject var model: CountriesController
     var countryId: UUID
     var country: Country {
-        return self.model.countries.first(where: { $0.id == self.countryId })!
+        return self.model.countries.first(where: { $0.id == self.countryId }) ?? Country(name: "")
     }
     
     var body: some View {
