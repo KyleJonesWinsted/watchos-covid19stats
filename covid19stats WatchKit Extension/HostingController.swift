@@ -13,6 +13,6 @@ import SwiftUI
 class HostingController: WKHostingController<AnyView> {
     override var body: AnyView {
         let countriesController = CountriesController()
-        return AnyView(ContentView().environmentObject(countriesController))
+        return AnyView(CountriesListView().environmentObject(countriesController))
     }
 }

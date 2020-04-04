@@ -30,6 +30,7 @@ final class CountriesController: ObservableObject {
             updatedCountries.append(country)
         }
         self.countries = updatedCountries
+        
     }
     
     public func addNewCountry(name: String) {

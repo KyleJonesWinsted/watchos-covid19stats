@@ -11,7 +11,7 @@
 		DA1AED8D243543A2003A8C0B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA1AED8B243543A2003A8C0B /* Interface.storyboard */; };
 		DA1AED8F243543A5003A8C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA1AED8E243543A5003A8C0B /* Assets.xcassets */; };
 		DA1AED96243543A5003A8C0B /* covid19stats WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA1AED95243543A5003A8C0B /* covid19stats WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		DA1AED9B243543A5003A8C0B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AED9A243543A5003A8C0B /* ContentView.swift */; };
+		DA1AED9B243543A5003A8C0B /* CountriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AED9A243543A5003A8C0B /* CountriesListView.swift */; };
 		DA1AED9D243543A5003A8C0B /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AED9C243543A5003A8C0B /* HostingController.swift */; };
 		DA1AED9F243543A5003A8C0B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AED9E243543A5003A8C0B /* ExtensionDelegate.swift */; };
 		DA1AEDA1243543A5003A8C0B /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AEDA0243543A5003A8C0B /* ComplicationController.swift */; };
@@ -19,6 +19,8 @@
 		DA1AEDA6243543A5003A8C0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA1AEDA5243543A5003A8C0B /* Preview Assets.xcassets */; };
 		DA1AEDB8243696D1003A8C0B /* CountriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AEDB7243696D1003A8C0B /* CountriesController.swift */; };
 		DA1AEDBA24369731003A8C0B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AEDB924369731003A8C0B /* Country.swift */; };
+		DAE5645C2438290C00AE7345 /* AddCountrySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5645B2438290C00AE7345 /* AddCountrySheet.swift */; };
+		DAE5645E2438293B00AE7345 /* CountryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5645D2438293B00AE7345 /* CountryDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,13 +66,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		DA1AED82243543A2003A8C0B /* covid19stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = covid19stats.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA1AED82243543A2003A8C0B /* COVID-19 Stats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "COVID-19 Stats.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA1AED86243543A2003A8C0B /* covid19stats WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "covid19stats WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA1AED8C243543A2003A8C0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		DA1AED8E243543A5003A8C0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA1AED90243543A5003A8C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA1AED95243543A5003A8C0B /* covid19stats WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "covid19stats WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA1AED9A243543A5003A8C0B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		DA1AED9A243543A5003A8C0B /* CountriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesListView.swift; sourceTree = "<group>"; };
 		DA1AED9C243543A5003A8C0B /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		DA1AED9E243543A5003A8C0B /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		DA1AEDA0243543A5003A8C0B /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
@@ -79,6 +81,8 @@
 		DA1AEDA7243543A5003A8C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA1AEDB7243696D1003A8C0B /* CountriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesController.swift; sourceTree = "<group>"; };
 		DA1AEDB924369731003A8C0B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		DAE5645B2438290C00AE7345 /* AddCountrySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCountrySheet.swift; sourceTree = "<group>"; };
+		DAE5645D2438293B00AE7345 /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +108,7 @@
 		DA1AED83243543A2003A8C0B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DA1AED82243543A2003A8C0B /* covid19stats.app */,
+				DA1AED82243543A2003A8C0B /* COVID-19 Stats.app */,
 				DA1AED86243543A2003A8C0B /* covid19stats WatchKit App.app */,
 				DA1AED95243543A5003A8C0B /* covid19stats WatchKit Extension.appex */,
 			);
@@ -124,7 +128,9 @@
 		DA1AED99243543A5003A8C0B /* covid19stats WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				DA1AED9A243543A5003A8C0B /* ContentView.swift */,
+				DA1AED9A243543A5003A8C0B /* CountriesListView.swift */,
+				DAE5645D2438293B00AE7345 /* CountryDetailView.swift */,
+				DAE5645B2438290C00AE7345 /* AddCountrySheet.swift */,
 				DA1AEDB7243696D1003A8C0B /* CountriesController.swift */,
 				DA1AEDB924369731003A8C0B /* Country.swift */,
 				DA1AED9C243543A5003A8C0B /* HostingController.swift */,
@@ -162,7 +168,7 @@
 			);
 			name = covid19stats;
 			productName = covid19stats;
-			productReference = DA1AED82243543A2003A8C0B /* covid19stats.app */;
+			productReference = DA1AED82243543A2003A8C0B /* COVID-19 Stats.app */;
 			productType = "com.apple.product-type.application.watchapp2-container";
 		};
 		DA1AED85243543A2003A8C0B /* covid19stats WatchKit App */ = {
@@ -273,11 +279,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE5645C2438290C00AE7345 /* AddCountrySheet.swift in Sources */,
 				DA1AEDBA24369731003A8C0B /* Country.swift in Sources */,
 				DA1AEDB8243696D1003A8C0B /* CountriesController.swift in Sources */,
 				DA1AED9D243543A5003A8C0B /* HostingController.swift in Sources */,
+				DAE5645E2438293B00AE7345 /* CountryDetailView.swift in Sources */,
 				DA1AEDA1243543A5003A8C0B /* ComplicationController.swift in Sources */,
-				DA1AED9B243543A5003A8C0B /* ContentView.swift in Sources */,
+				DA1AED9B243543A5003A8C0B /* CountriesListView.swift in Sources */,
 				DA1AED9F243543A5003A8C0B /* ExtensionDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,7 +523,7 @@
 				DEVELOPMENT_TEAM = 25DUYVKN98;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.KyleJones.covid19stats;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "COVID-19 Stats";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -528,7 +536,7 @@
 				DEVELOPMENT_TEAM = 25DUYVKN98;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.KyleJones.covid19stats;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "COVID-19 Stats";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
