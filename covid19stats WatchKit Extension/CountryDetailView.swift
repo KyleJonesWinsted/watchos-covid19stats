@@ -19,37 +19,27 @@ struct CountryDetailView: View {
         ScrollView {
             HStack {
                 VStack(alignment: .leading) {
-                    VStack(alignment: .leading) {
-                        Text("Total Cases")
-                        Text(country.cases?.total.description ?? "--")
-                            .font(.largeTitle)
-                        Text("New Cases")
-                            .foregroundColor(.blue)
-                        Text(country.cases?.new ?? "--")
-                            .font(.title)
-                        Text("Active")
-                            .foregroundColor(.yellow)
-                        Text(country.cases?.active.description ?? "--")
-                            .font(.title)
-                        Text("Critical Condition")
-                            .foregroundColor(.orange)
-                        Text(country.cases?.critical.description ?? "--")
-                            .font(.title)
-                        Text("Recovered")
-                            .foregroundColor(.green)
-                        Text(country.cases?.recovered.description ?? "--")
-                            .font(.title)
-                    }
-                    VStack(alignment: .leading) {
-                        Text("Total Deaths")
-                            .foregroundColor(.red)
-                        Text(country.deaths?.total.description ?? "--")
-                            .font(.title)
-                        Text("New Deaths")
-                            .foregroundColor(.pink)
-                        Text(country.deaths?.new ?? "--")
-                            .font(.title)
-                    }
+                    CountryDetailRow(statName: "Total Cases",
+                                     statValue: country.cases?.total.description ?? "--",
+                                     statNameColor: .white)
+                    CountryDetailRow(statName: "New Cases",
+                                     statValue: country.cases?.new ?? "--",
+                                     statNameColor: .blue)
+                    CountryDetailRow(statName: "Active",
+                                     statValue: country.cases?.active.description ?? "--",
+                                     statNameColor: .yellow)
+                    CountryDetailRow(statName: "Critical Condition",
+                                     statValue: country.cases?.critical.description ?? "--",
+                                     statNameColor: .orange)
+                    CountryDetailRow(statName: "Recovered",
+                                     statValue: country.cases?.recovered.description ?? "--",
+                                     statNameColor: .green)
+                    CountryDetailRow(statName: "Total Deaths",
+                                     statValue: country.deaths?.total.description ?? "--",
+                                     statNameColor: .red)
+                    CountryDetailRow(statName: "New Deaths",
+                                     statValue: country.deaths?.new ?? "--",
+                                     statNameColor: .pink)
                     Spacer()
                 }
                 .navigationBarTitle(country.name)
@@ -62,7 +52,23 @@ struct CountryDetailView: View {
         }
     }
     
-    func getCountry() {
-        return
+}
+
+struct CountryDetailRow: View {
+    var statName: String
+    var statValue: String
+    var statNameColor: Color
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(statName)
+                .font(.subheadline)
+                .foregroundColor(statNameColor)
+            Text(statValue)
+                .font(.title)
+                .padding(.bottom, -20)
+            Divider()
+        }
+        
     }
 }
