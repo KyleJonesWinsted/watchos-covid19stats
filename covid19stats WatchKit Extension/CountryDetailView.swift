@@ -18,30 +18,30 @@ struct CountryDetailView: View {
     var body: some View {
         ScrollView {
             HStack {
-                VStack(alignment: .leading) {
+                VStack(alignment: .trailing) {
                     CountryDetailRow(statName: "Total Cases",
-                                     statValue: country.cases?.total?.description ?? "--",
+                                     statValue: country.cases?.total?.withCommas() ?? "--",
                                      statNameColor: .white)
                     CountryDetailRow(statName: "New Cases",
                                      statValue: country.cases?.new ?? "--",
                                      statNameColor: .blue)
                     CountryDetailRow(statName: "Active",
-                                     statValue: country.cases?.active?.description ?? "--",
+                                     statValue: country.cases?.active?.withCommas() ?? "--",
                                      statNameColor: .yellow)
                     CountryDetailRow(statName: "Critical Condition",
-                                     statValue: country.cases?.critical?.description ?? "--",
+                                     statValue: country.cases?.critical?.withCommas() ?? "--",
                                      statNameColor: .orange)
                     CountryDetailRow(statName: "Recovered",
-                                     statValue: country.cases?.recovered?.description ?? "--",
+                                     statValue: country.cases?.recovered?.withCommas() ?? "--",
                                      statNameColor: .green)
                     CountryDetailRow(statName: "Total Deaths",
-                                     statValue: country.deaths?.total?.description ?? "--",
+                                     statValue: country.deaths?.total?.withCommas() ?? "--",
                                      statNameColor: .red)
                     CountryDetailRow(statName: "New Deaths",
                                      statValue: country.deaths?.new ?? "--",
                                      statNameColor: .pink)
                     CountryDetailRow(statName: "Tests",
-                                     statValue: country.tests?.total?.description ?? "--",
+                                     statValue: country.tests?.total?.withCommas() ?? "--",
                                      statNameColor: .purple)
                     Spacer()
                 }

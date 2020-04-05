@@ -18,7 +18,7 @@ struct CountriesListView: View {
                 NavigationLink(destination: CountryDetailView(countryId: country.id).environmentObject(self.model)) {
                     VStack(alignment: .leading) {
                         Text(country.name)
-                        Text(country.cases?.total?.description ?? "--")
+                        Text(country.cases?.total?.withCommas() ?? "--")
                             .font(.title)
                     }
                 }
