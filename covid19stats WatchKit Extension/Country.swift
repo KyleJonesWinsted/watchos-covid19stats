@@ -40,9 +40,9 @@ class Country {
     }
     
     public func updateStats() {
-        let nowPlusFifteenMinutes = Date().addingTimeInterval(900)
+        let now = Date()
         if let updateTime = self.updateTime,
-            updateTime < nowPlusFifteenMinutes {
+            now < updateTime.addingTimeInterval(900) {
             return
         }
         print("update \(self.name)")
