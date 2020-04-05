@@ -39,13 +39,17 @@ final class CountriesController: ObservableObject {
     
     private func loadCountries() {
         let defaults = UserDefaults.standard
-        let countries = defaults.object(forKey: "Countries") as? [Country] ?? [Country(name: "All")]
-        self.countries = countries
+        let countriesStrings = defaults.stringArray(forKey: "Countries") ?? ["World"]
+        for string in countriesStrings {
+            self.addNewCountry(name: string)
+        }
     }
     
-    private func saveCountries() {
+    public func saveCountries() {
         let defaults = UserDefaults.standard
-        defaults.set(self.countries, forKey: "Countries")
+        let countriesStrings = self.countries.map { $0.name }
+        defaults.set(countriesStrings, forKey: "Countries")
+        print(defaults.stringArray(forKey: "Countries"))
     }
     
     private func getCountryNames() {
