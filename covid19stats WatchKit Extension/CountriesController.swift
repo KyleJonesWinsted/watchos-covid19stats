@@ -11,16 +11,22 @@ import Combine
 
 final class CountriesController: ObservableObject {
     
+    static let shared = CountriesController()
+    
     let objectWillChange = ObservableObjectPublisher()
     
-    @Published var countries: [Country]
+    var countries: [Country] {
+        willSet {
+            objectWillChange.send()
+        }
+    }
     @Published var namesOfCountries: [String]
     
     init() {
         self.countries = []
         self.namesOfCountries = []
         self.getCountryNames()
-        self.updateAllStats()
+        self.loadCountries()
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(countryUpdated), name: Notification.Name("Country Updated"), object: nil)
     }
@@ -29,6 +35,17 @@ final class CountriesController: ObservableObject {
         DispatchQueue.main.async {
             self.objectWillChange.send()
         }
+    }
+    
+    private func loadCountries() {
+        let defaults = UserDefaults.standard
+        let countries = defaults.object(forKey: "Countries") as? [Country] ?? [Country(name: "All")]
+        self.countries = countries
+    }
+    
+    private func saveCountries() {
+        let defaults = UserDefaults.standard
+        defaults.set(self.countries, forKey: "Countries")
     }
     
     private func getCountryNames() {
@@ -73,13 +90,10 @@ final class CountriesController: ObservableObject {
     }
     
     public func updateAllStats() {
-        var updatedCountries = [Country]()
+        print("update all")
         for country in self.countries {
             country.updateStats()
-            updatedCountries.append(country)
         }
-        self.countries = updatedCountries
-        
     }
     
     public func addNewCountry(name: String) {

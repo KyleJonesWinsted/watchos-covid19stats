@@ -40,6 +40,12 @@ class Country {
     }
     
     public func updateStats() {
+        let nowPlusFifteenMinutes = Date().addingTimeInterval(900)
+        if let updateTime = self.updateTime,
+            updateTime < nowPlusFifteenMinutes {
+            return
+        }
+        print("update \(self.name)")
         self.getStatsJson { (result) in
             switch result {
                 case .success(let json):
