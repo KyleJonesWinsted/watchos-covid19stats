@@ -14,6 +14,7 @@ class Country {
     var name: String
     var cases: Cases?
     var deaths: Deaths?
+    var tests: Tests?
     var updateTime: Date?
     var formattedTime: String? {
         guard let updateTime = self.updateTime else { return nil }
@@ -26,9 +27,10 @@ class Country {
         self.name = name
     }
     
-    private func setStats(cases: Cases, deaths: Deaths) {
+    private func setStats(cases: Cases, deaths: Deaths, tests: Tests) {
         self.cases = cases
         self.deaths = deaths
+        self.tests = tests
         self.updateTime = Date()
     }
     
@@ -42,17 +44,19 @@ class Country {
             switch result {
                 case .success(let json):
                     let responseArray = json["response"] as? Array<Any>
-                    let response = responseArray![0] as! [String: Any]
-                    let casesJson = response["cases"] as! [String: Any]
-                    let deathsJson = response["deaths"] as! [String: Any]
-                    let cases = Cases(new: casesJson["new"] as! String,
-                                      active: casesJson["active"] as! Int,
-                                      critical: casesJson["critical"] as! Int,
-                                      recovered: casesJson["recovered"] as! Int,
-                                      total: casesJson["total"] as! Int)
-                    let deaths = Deaths(new: deathsJson["new"] as! String,
-                                        total: deathsJson["total"] as! Int)
-                    self.setStats(cases: cases, deaths: deaths)
+                    guard let response = responseArray?[0] as? [String: Any] else { return }
+                    let casesJson = response["cases"] as? [String: Any]
+                    let deathsJson = response["deaths"] as? [String: Any]
+                    let testsJSon = response["tests"] as? [String: Any]
+                    let cases = Cases(new: casesJson?["new"] as? String,
+                                      active: casesJson?["active"] as? Int,
+                                      critical: casesJson?["critical"] as? Int,
+                                      recovered: casesJson?["recovered"] as? Int,
+                                      total: casesJson?["total"] as? Int)
+                    let deaths = Deaths(new: deathsJson?["new"] as? String,
+                                        total: deathsJson?["total"] as? Int)
+                    let tests = Tests(total: testsJSon?["total"] as? Int)
+                    self.setStats(cases: cases, deaths: deaths, tests: tests)
                     self.sendCountryUpdatedNotification()
                 case .failure(let error):
                     print(error)
@@ -91,14 +95,18 @@ class Country {
     }
 }
 
-struct Cases {
-    var new: String
-    var active, critical, recovered, total: Int
+struct Cases: Codable {
+    var new: String?
+    var active, critical, recovered, total: Int?
 }
 
-struct Deaths {
-    var new: String
-    var total: Int
+struct Deaths: Codable {
+    var new: String?
+    var total: Int?
+}
+
+struct Tests: Codable {
+    var total: Int?
 }
 
 enum NetworkError: Error {

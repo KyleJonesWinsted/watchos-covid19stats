@@ -74,7 +74,7 @@ final class CountriesController: ObservableObject {
     
     public func updateAllStats() {
         var updatedCountries = [Country]()
-        for var country in self.countries {
+        for country in self.countries {
             country.updateStats()
             updatedCountries.append(country)
         }
@@ -83,7 +83,7 @@ final class CountriesController: ObservableObject {
     }
     
     public func addNewCountry(name: String) {
-        var newCountry = Country(name: name)
+        let newCountry = Country(name: name)
         self.countries.append(newCountry)
         newCountry.updateStats()
     }

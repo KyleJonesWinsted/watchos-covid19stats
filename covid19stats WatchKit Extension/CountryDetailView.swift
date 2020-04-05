@@ -20,26 +20,29 @@ struct CountryDetailView: View {
             HStack {
                 VStack(alignment: .leading) {
                     CountryDetailRow(statName: "Total Cases",
-                                     statValue: country.cases?.total.description ?? "--",
+                                     statValue: country.cases?.total?.description ?? "--",
                                      statNameColor: .white)
                     CountryDetailRow(statName: "New Cases",
                                      statValue: country.cases?.new ?? "--",
                                      statNameColor: .blue)
                     CountryDetailRow(statName: "Active",
-                                     statValue: country.cases?.active.description ?? "--",
+                                     statValue: country.cases?.active?.description ?? "--",
                                      statNameColor: .yellow)
                     CountryDetailRow(statName: "Critical Condition",
-                                     statValue: country.cases?.critical.description ?? "--",
+                                     statValue: country.cases?.critical?.description ?? "--",
                                      statNameColor: .orange)
                     CountryDetailRow(statName: "Recovered",
-                                     statValue: country.cases?.recovered.description ?? "--",
+                                     statValue: country.cases?.recovered?.description ?? "--",
                                      statNameColor: .green)
                     CountryDetailRow(statName: "Total Deaths",
-                                     statValue: country.deaths?.total.description ?? "--",
+                                     statValue: country.deaths?.total?.description ?? "--",
                                      statNameColor: .red)
                     CountryDetailRow(statName: "New Deaths",
                                      statValue: country.deaths?.new ?? "--",
                                      statNameColor: .pink)
+                    CountryDetailRow(statName: "Tests",
+                                     statValue: country.tests?.total?.description ?? "--",
+                                     statNameColor: .purple)
                     Spacer()
                 }
                 .navigationBarTitle(country.name)
