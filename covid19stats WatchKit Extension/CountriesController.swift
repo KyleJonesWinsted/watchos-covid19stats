@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import WatchKit
 
 final class CountriesController: ObservableObject {
     
@@ -49,7 +50,6 @@ final class CountriesController: ObservableObject {
         let defaults = UserDefaults.standard
         let countriesStrings = self.countries.map { $0.name }
         defaults.set(countriesStrings, forKey: "Countries")
-        print(defaults.stringArray(forKey: "Countries"))
     }
     
     private func getCountryNames() {
@@ -97,6 +97,28 @@ final class CountriesController: ObservableObject {
         print("update all")
         for country in self.countries {
             country.updateStats()
+        }
+    }
+    
+    public func backgroundUpdateAllStats() {
+        for country in self.countries {
+            country.backgroundUpdateStats()
+        }
+    }
+    
+    public func handleAllBackgroundDownloads(_ backgroundTask: WKURLSessionRefreshBackgroundTask) {
+        if let country = countries.first(where: { $0.id.uuidString == backgroundTask.sessionIdentifier }) {
+            country.handleDownload(backgroundTask)
+        }
+    }
+    
+    public func scheduleBackgroundRefresh() {
+        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date().addingTimeInterval(3600), userInfo: nil) { (error) in
+            if let error = error {
+                print("Background task failed to schedule: \(error)")
+            } else {
+                print("Scheduled refresh in 1 hour")
+            }
         }
     }
     

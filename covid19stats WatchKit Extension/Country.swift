@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import WatchKit
 
-class Country {
+class Country: NSObject, URLSessionDownloadDelegate {
     
     var id = UUID()
     var name: String
@@ -23,6 +24,8 @@ class Country {
         return formatter.string(from: updateTime)
     }
     
+    var pendingBackgroundTasks = [WKURLSessionRefreshBackgroundTask]()
+    
     init(name: String) {
         self.name = name
     }
@@ -32,6 +35,7 @@ class Country {
         self.deaths = deaths
         self.tests = tests
         self.updateTime = Date()
+        self.sendCountryUpdatedNotification()
     }
     
     private func sendCountryUpdatedNotification() {
@@ -49,39 +53,32 @@ class Country {
         self.getStatsJson { (result) in
             switch result {
                 case .success(let json):
-                    let responseArray = json["response"] as? Array<Any>
-                    guard let response = responseArray?[0] as? [String: Any] else { return }
-                    let casesJson = response["cases"] as? [String: Any]
-                    let deathsJson = response["deaths"] as? [String: Any]
-                    let testsJSon = response["tests"] as? [String: Any]
-                    let cases = Cases(new: casesJson?["new"] as? String,
-                                      active: casesJson?["active"] as? Int,
-                                      critical: casesJson?["critical"] as? Int,
-                                      recovered: casesJson?["recovered"] as? Int,
-                                      total: casesJson?["total"] as? Int)
-                    let deaths = Deaths(new: deathsJson?["new"] as? String,
-                                        total: deathsJson?["total"] as? Int)
-                    let tests = Tests(total: testsJSon?["total"] as? Int)
-                    self.setStats(cases: cases, deaths: deaths, tests: tests)
-                    self.sendCountryUpdatedNotification()
+                    self.processJSONAndSetStats(with: json)
                 case .failure(let error):
                     print(error)
             }
         }
     }
     
+    private func processJSONAndSetStats(with json: [String: Any]) {
+        let responseArray = json["response"] as? Array<Any>
+        guard let response = responseArray?[0] as? [String: Any] else { return }
+        let casesJson = response["cases"] as? [String: Any]
+        let deathsJson = response["deaths"] as? [String: Any]
+        let testsJSon = response["tests"] as? [String: Any]
+        let cases = Cases(new: casesJson?["new"] as? String,
+                          active: casesJson?["active"] as? Int,
+                          critical: casesJson?["critical"] as? Int,
+                          recovered: casesJson?["recovered"] as? Int,
+                          total: casesJson?["total"] as? Int)
+        let deaths = Deaths(new: deathsJson?["new"] as? String,
+                            total: deathsJson?["total"] as? Int)
+        let tests = Tests(total: testsJSon?["total"] as? Int)
+        self.setStats(cases: cases, deaths: deaths, tests: tests)
+    }
+    
     private func getStatsJson(completionHandler: @escaping (Result<[String: Any], Error>) -> Void) {
-        var components = URLComponents(string: "https://covid-193.p.rapidapi.com/statistics")!
-        components.queryItems = [
-            URLQueryItem(name: "country", value: self.name)
-        ]
-        let url = components.url!
-        var request = URLRequest(url: url)
-        let headers: [String: String] = [
-            "x-rapidapi-host": "covid-193.p.rapidapi.com",
-            "x-rapidapi-key": ConfigString.rapidApiKey.rawValue
-        ]
-        request.allHTTPHeaderFields = headers
+        let request = self.createURLRequest()
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 completionHandler(.failure(error))
@@ -99,6 +96,51 @@ class Country {
         }
         task.resume()
     }
+    
+    private func createURLRequest() -> URLRequest {
+        var components = URLComponents(string: "https://covid-193.p.rapidapi.com/statistics")!
+        components.queryItems = [
+            URLQueryItem(name: "country", value: self.name)
+        ]
+        let url = components.url!
+        var request = URLRequest(url: url)
+        let headers: [String: String] = [
+            "x-rapidapi-host": "covid-193.p.rapidapi.com",
+            "x-rapidapi-key": ConfigString.rapidApiKey.rawValue
+        ]
+        request.allHTTPHeaderFields = headers
+        return request
+    }
+    
+    public func backgroundUpdateStats() {
+        let configuration = URLSessionConfiguration.background(withIdentifier: self.id.uuidString)
+        let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        let request = self.createURLRequest()
+        let backgroundTask = session.downloadTask(with: request)
+        backgroundTask.resume()
+    }
+    
+    public func handleDownload(_ backgroundTask: WKURLSessionRefreshBackgroundTask) {
+        let configuration = URLSessionConfiguration.background(withIdentifier: backgroundTask.sessionIdentifier)
+        let _ = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        pendingBackgroundTasks.append(backgroundTask)
+    }
+    
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        if let data = try? Data(contentsOf: location),
+            let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                self.processJSONAndSetStats(with: json)
+        }
+        
+        self.pendingBackgroundTasks.forEach {
+            $0.setTaskCompletedWithSnapshot(false)
+        }
+        
+        
+        CountriesController.shared.scheduleBackgroundRefresh()
+    }
+    
+    
 }
 
 struct Cases: Codable {
