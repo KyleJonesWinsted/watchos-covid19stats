@@ -20,6 +20,15 @@ final class CountriesController: ObservableObject {
         willSet {
             objectWillChange.send()
         }
+        didSet {
+            if let oldId = oldValue.first?.id,
+                let newId = self.countries.first?.id,
+                oldId != newId {
+                    let server = CLKComplicationServer.sharedInstance()
+                    server.activeComplications?.forEach(server.reloadTimeline)
+            }
+            
+        }
     }
     @Published var namesOfCountries: [String]
     

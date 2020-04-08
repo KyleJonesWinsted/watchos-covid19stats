@@ -23,6 +23,30 @@ class Country: NSObject, URLSessionDownloadDelegate {
         formatter.timeStyle = .short
         return formatter.string(from: updateTime)
     }
+    var shortTotalCases: String? {
+        guard let totalCases = self.cases?.total else { return nil }
+        let cases = Double(totalCases)
+        switch totalCases {
+        case 0...999:
+            return String(totalCases)
+        case 1000...9999:
+            return String(format: "%.2f", cases / 1000.0) + "K"
+        case 10000...99999:
+            return String(format: "%.1f", cases / 10000.0) + "K"
+        case 100000...999999:
+            return String(Int(cases / 100000)) + "K"
+        case 1000000...9999999:
+            return String(format: "%.2f", cases / 1000000.0) + "M"
+        case 10000000...99999999:
+            return String(format: "%.1f", cases / 10000000.0) + "M"
+        case 100000000...999999999:
+            return String(Int(cases / 100000000)) + "M"
+        case 1000000000...Int.max:
+            return String(format: "%.2f", cases / 1000000000) + "B"
+        default:
+            return String(totalCases)
+        }
+    }
     
     var pendingBackgroundTasks = [WKURLSessionRefreshBackgroundTask]()
     
@@ -36,6 +60,11 @@ class Country: NSObject, URLSessionDownloadDelegate {
         self.tests = tests
         self.updateTime = Date()
         self.sendCountryUpdatedNotification()
+        if let firstID = CountriesController.shared.countries.first?.id,
+            self.id == firstID {
+            let server = CLKComplicationServer.sharedInstance()
+            server.activeComplications?.forEach(server.reloadTimeline)
+        }
     }
     
     private func sendCountryUpdatedNotification() {
