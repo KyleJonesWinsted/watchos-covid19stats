@@ -23,12 +23,12 @@ class Country: NSObject, URLSessionDownloadDelegate {
         formatter.timeStyle = .short
         return formatter.string(from: updateTime)
     }
-    var shortTotalCases: String? {
-        guard let totalCases = self.cases?.total else { return nil }
-        let cases = Double(totalCases)
-        switch totalCases {
+    var shortActiveCases: String? {
+        guard let activeCases = self.cases?.active else { return nil }
+        let cases = Double(activeCases)
+        switch activeCases {
         case 0...999:
-            return String(totalCases)
+            return String(activeCases)
         case 1000...9999:
             return String(format: "%.2f", cases / 1000.0) + "K"
         case 10000...99999:
@@ -44,7 +44,7 @@ class Country: NSObject, URLSessionDownloadDelegate {
         case 1000000000...Int.max:
             return String(format: "%.2f", cases / 1000000000) + "B"
         default:
-            return String(totalCases)
+            return String(activeCases)
         }
     }
     
@@ -78,7 +78,6 @@ class Country: NSObject, URLSessionDownloadDelegate {
             now < updateTime.addingTimeInterval(900) {
             return
         }
-        print("update \(self.name)")
         self.getStatsJson { (result) in
             switch result {
                 case .success(let json):
@@ -142,7 +141,7 @@ class Country: NSObject, URLSessionDownloadDelegate {
     }
     
     public func backgroundUpdateStats() {
-        let configuration = URLSessionConfiguration.background(withIdentifier: self.id.uuidString)
+        let configuration = URLSessionConfiguration.background(withIdentifier: "BackgroundUpdate")
         let session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
         let request = self.createURLRequest()
         let backgroundTask = session.downloadTask(with: request)
@@ -161,9 +160,13 @@ class Country: NSObject, URLSessionDownloadDelegate {
                 self.processJSONAndSetStats(with: json)
         }
         
+        session.finishTasksAndInvalidate()
+        
         self.pendingBackgroundTasks.forEach {
             $0.setTaskCompletedWithSnapshot(false)
         }
+        
+        CountriesController.shared.scheduleBackgroundRefresh()
         
     }
     

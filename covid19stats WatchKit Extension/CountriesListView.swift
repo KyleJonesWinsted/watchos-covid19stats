@@ -18,7 +18,7 @@ struct CountriesListView: View {
                 NavigationLink(destination: CountryDetailView(countryId: country.id).environmentObject(self.model)) {
                     VStack(alignment: .leading) {
                         Text(country.name)
-                        Text(country.cases?.total?.withCommas() ?? "--")
+                        Text(country.cases?.active?.withCommas() ?? "--")
                             .font(.title)
                     }
                 }
@@ -39,7 +39,7 @@ struct CountriesListView: View {
                 .listRowPlatterColor(.clear)
             
         }
-        .navigationBarTitle("COVID19 Stats")
+        .navigationBarTitle("COVID19")
         .sheet(isPresented: self.$isDetailViewPresented) {
             AddCountrySheet(isDetailViewPresented: self.$isDetailViewPresented).environmentObject(self.model)
         }

@@ -19,15 +19,15 @@ struct CountryDetailView: View {
         ScrollView {
             HStack {
                 VStack(alignment: .trailing) {
+                    CountryDetailRow(statName: "Active Cases",
+                                     statValue: country.cases?.active?.withCommas() ?? "--",
+                                     statNameColor: .yellow)
                     CountryDetailRow(statName: "Total Cases",
                                      statValue: country.cases?.total?.withCommas() ?? "--",
                                      statNameColor: .white)
                     CountryDetailRow(statName: "New Cases",
                                      statValue: country.cases?.new ?? "--",
                                      statNameColor: .blue)
-                    CountryDetailRow(statName: "Active",
-                                     statValue: country.cases?.active?.withCommas() ?? "--",
-                                     statNameColor: .yellow)
                     CountryDetailRow(statName: "Critical Condition",
                                      statValue: country.cases?.critical?.withCommas() ?? "--",
                                      statNameColor: .orange)
@@ -40,7 +40,7 @@ struct CountryDetailView: View {
                     CountryDetailRow(statName: "New Deaths",
                                      statValue: country.deaths?.new ?? "--",
                                      statNameColor: .pink)
-                    CountryDetailRow(statName: "Tests",
+                    CountryDetailRow(statName: "Tests Done",
                                      statValue: country.tests?.total?.withCommas() ?? "--",
                                      statNameColor: .purple)
                     Spacer()

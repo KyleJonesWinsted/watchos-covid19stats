@@ -103,31 +103,29 @@ final class CountriesController: ObservableObject {
     }
     
     public func updateAllStats() {
-        print("update all")
         for country in self.countries {
             country.updateStats()
         }
     }
     
     public func backgroundUpdateAllStats() {
-        for country in self.countries {
+        if let country = self.countries.first {
             country.backgroundUpdateStats()
         }
-        self.scheduleBackgroundRefresh()
     }
     
     public func handleAllBackgroundDownloads(_ backgroundTask: WKURLSessionRefreshBackgroundTask) {
-        if let country = countries.first(where: { $0.id.uuidString == backgroundTask.sessionIdentifier }) {
+        if let country = countries.first {
             country.handleDownload(backgroundTask)
         }
     }
     
     public func scheduleBackgroundRefresh() {
-        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date().addingTimeInterval(1800), userInfo: nil) { (error) in
+        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date().addingTimeInterval(15 * 60), userInfo: nil) { (error) in
             if let error = error {
                 print("Background task failed to schedule: \(error)")
             } else {
-                print("Scheduled refresh in 1 hour")
+                print("Scheduled refresh")
             }
         }
     }
