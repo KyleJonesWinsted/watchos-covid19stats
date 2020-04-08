@@ -11,7 +11,7 @@
 		DA1AED87243543A2003A8C0B /* covid19stats WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = DA1AED86243543A2003A8C0B /* covid19stats WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DA1AED8D243543A2003A8C0B /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA1AED8B243543A2003A8C0B /* Interface.storyboard */; };
 		DA1AED8F243543A5003A8C0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA1AED8E243543A5003A8C0B /* Assets.xcassets */; };
-		DA1AED96243543A5003A8C0B /* COVID-19 Stats.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA1AED95243543A5003A8C0B /* COVID-19 Stats.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		DA1AED96243543A5003A8C0B /* covid19stats WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = DA1AED95243543A5003A8C0B /* covid19stats WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DA1AED9B243543A5003A8C0B /* CountriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AED9A243543A5003A8C0B /* CountriesListView.swift */; };
 		DA1AED9D243543A5003A8C0B /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AED9C243543A5003A8C0B /* HostingController.swift */; };
 		DA1AED9F243543A5003A8C0B /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AED9E243543A5003A8C0B /* ExtensionDelegate.swift */; };
@@ -48,7 +48,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				DA1AED96243543A5003A8C0B /* COVID-19 Stats.appex in Embed App Extensions */,
+				DA1AED96243543A5003A8C0B /* covid19stats WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,7 +73,7 @@
 		DA1AED8C243543A2003A8C0B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		DA1AED8E243543A5003A8C0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA1AED90243543A5003A8C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DA1AED95243543A5003A8C0B /* COVID-19 Stats.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "COVID-19 Stats.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA1AED95243543A5003A8C0B /* covid19stats WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "covid19stats WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA1AED9A243543A5003A8C0B /* CountriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesListView.swift; sourceTree = "<group>"; };
 		DA1AED9C243543A5003A8C0B /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		DA1AED9E243543A5003A8C0B /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 			children = (
 				DA1AED82243543A2003A8C0B /* COVID-19 Stats.app */,
 				DA1AED86243543A2003A8C0B /* covid19stats WatchKit App.app */,
-				DA1AED95243543A5003A8C0B /* COVID-19 Stats.appex */,
+				DA1AED95243543A5003A8C0B /* covid19stats WatchKit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -205,7 +205,7 @@
 			);
 			name = "covid19stats WatchKit Extension";
 			productName = "covid19stats WatchKit Extension";
-			productReference = DA1AED95243543A5003A8C0B /* COVID-19 Stats.appex */;
+			productReference = DA1AED95243543A5003A8C0B /* covid19stats WatchKit Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
@@ -448,7 +448,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.KyleJones.covid19stats.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "COVID-19 Stats";
+				PRODUCT_NAME = "covid19stats WatchKit Extension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -472,7 +472,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.KyleJones.covid19stats.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "COVID-19 Stats";
+				PRODUCT_NAME = "covid19stats WatchKit Extension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
