@@ -104,6 +104,7 @@ final class CountriesController: ObservableObject {
         for country in self.countries {
             country.backgroundUpdateStats()
         }
+        self.scheduleBackgroundRefresh()
     }
     
     public func handleAllBackgroundDownloads(_ backgroundTask: WKURLSessionRefreshBackgroundTask) {
@@ -113,7 +114,7 @@ final class CountriesController: ObservableObject {
     }
     
     public func scheduleBackgroundRefresh() {
-        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date().addingTimeInterval(3600), userInfo: nil) { (error) in
+        WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date().addingTimeInterval(1800), userInfo: nil) { (error) in
             if let error = error {
                 print("Background task failed to schedule: \(error)")
             } else {

@@ -136,8 +136,6 @@ class Country: NSObject, URLSessionDownloadDelegate {
             $0.setTaskCompletedWithSnapshot(false)
         }
         
-        
-        CountriesController.shared.scheduleBackgroundRefresh()
     }
     
     

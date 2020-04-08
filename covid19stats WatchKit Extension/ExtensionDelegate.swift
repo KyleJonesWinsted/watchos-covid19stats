@@ -12,6 +12,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
         // Perform any final initialization of your application.
+        CountriesController.shared.scheduleBackgroundRefresh()
     }
 
     func applicationDidBecomeActive() {
@@ -23,7 +24,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, etc.
         CountriesController.shared.saveCountries()
-        CountriesController.shared.scheduleBackgroundRefresh()
     }
 
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
