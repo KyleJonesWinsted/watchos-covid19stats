@@ -32,15 +32,15 @@ class Country: NSObject, URLSessionDownloadDelegate {
         case 1000...9999:
             return String(format: "%.2f", cases / 1000.0) + "K"
         case 10000...99999:
-            return String(format: "%.1f", cases / 10000.0) + "K"
+            return String(format: "%.1f", cases / 1000.0) + "K"
         case 100000...999999:
-            return String(Int(cases / 100000)) + "K"
+            return String(Int(cases / 1000)) + "K"
         case 1000000...9999999:
             return String(format: "%.2f", cases / 1000000.0) + "M"
         case 10000000...99999999:
-            return String(format: "%.1f", cases / 10000000.0) + "M"
+            return String(format: "%.1f", cases / 1000000.0) + "M"
         case 100000000...999999999:
-            return String(Int(cases / 100000000)) + "M"
+            return String(Int(cases / 1000000)) + "M"
         case 1000000000...Int.max:
             return String(format: "%.2f", cases / 1000000000) + "B"
         default:
