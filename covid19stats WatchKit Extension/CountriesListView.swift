@@ -24,7 +24,11 @@ struct CountriesListView: View {
                 }
             }
             .onMove(perform: { self.model.countries.move(fromOffsets: $0, toOffset: $1)})
-            .onDelete(perform: { self.model.countries.remove(atOffsets: $0) } )
+            .onDelete(perform: {
+                if self.model.countries[$0.first!].name != "All" {
+                    self.model.countries.remove(atOffsets: $0)
+                }
+            })
             
             Button(action: {
                 self.isDetailViewPresented = true

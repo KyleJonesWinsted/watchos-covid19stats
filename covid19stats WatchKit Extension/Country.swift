@@ -89,8 +89,9 @@ class Country: NSObject, URLSessionDownloadDelegate {
     }
     
     private func processJSONAndSetStats(with json: [String: Any]) {
-        let responseArray = json["response"] as? Array<Any>
-        guard let response = responseArray?[0] as? [String: Any] else { return }
+        guard let responseArray = json["response"] as? Array<Any>,
+            responseArray.count > 0,
+            let response = responseArray[0] as? [String: Any] else { return }
         let casesJson = response["cases"] as? [String: Any]
         let deathsJson = response["deaths"] as? [String: Any]
         let testsJSon = response["tests"] as? [String: Any]

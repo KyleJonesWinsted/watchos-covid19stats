@@ -49,7 +49,7 @@ final class CountriesController: ObservableObject {
     
     private func loadCountries() {
         let defaults = UserDefaults.standard
-        let countriesStrings = defaults.stringArray(forKey: "Countries") ?? ["World"]
+        let countriesStrings = defaults.stringArray(forKey: "Countries") ?? ["All"]
         for string in countriesStrings {
             self.addNewCountry(name: string)
         }
