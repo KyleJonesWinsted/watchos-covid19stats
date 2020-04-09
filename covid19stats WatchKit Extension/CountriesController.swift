@@ -66,7 +66,8 @@ final class CountriesController: ObservableObject {
             switch result {
             case .success(let json):
                 let response = json["response"] as! Array<String>
-                self.namesOfCountries = response
+                self.namesOfCountries = ["All"]
+                self.namesOfCountries += response
             case .failure(let error):
                 print(error)
             }
