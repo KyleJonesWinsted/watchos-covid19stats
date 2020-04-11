@@ -1,8 +1,8 @@
 # COVID-19 Stats (watchOS)
 
-## Keep track of the latest numbers regarding the coronavirus SARS-COV-2 right on your Apple Watch
+### Keep track of the latest numbers regarding the coronavirus SARS-COV-2 right on your Apple Watch
 
-### Usage
+## Usage
 
 To get started simply open app on your Apple Watch. By default the only listing will be statistics for the entire world. You can tap "+ Add Country" and select a country from the list to start tracking stats for that country.
 
@@ -23,7 +23,7 @@ Tapping on a country will reveal all the available stats for that country. Stats
 
 Data is updated every 15 minutes or as often as watchOS allows given your current conditions (battery life, data connection, etc.).
 
-### Installation
+## Installation
 
 Due to App Store Review Guidelines 5.1.1(ix) this app cannot be distributed via the watchOS App Store. Since this app technically provides a service related to the healthcare field, it cannot be submitted by an individual developer like myself.
 
