@@ -2,6 +2,8 @@
 
 ### Keep track of the latest numbers regarding the coronavirus SARS-COV-2 right on your Apple Watch
 
+![App Screenshots](https://i.imgur.com/lNjBq3a.png)
+
 ## Usage
 
 To get started simply open app on your Apple Watch. By default the only listing will be statistics for the entire world. You can tap "+ Add Country" and select a country from the list to start tracking stats for that country.
