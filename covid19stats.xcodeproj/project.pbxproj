@@ -20,6 +20,7 @@
 		DA1AEDA6243543A5003A8C0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA1AEDA5243543A5003A8C0B /* Preview Assets.xcassets */; };
 		DA1AEDB8243696D1003A8C0B /* CountriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AEDB7243696D1003A8C0B /* CountriesController.swift */; };
 		DA1AEDBA24369731003A8C0B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1AEDB924369731003A8C0B /* Country.swift */; };
+		DAC5E384249837B100AE34F6 /* StandardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC5E383249837B100AE34F6 /* StandardExtensions.swift */; };
 		DAE5645C2438290C00AE7345 /* AddCountrySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5645B2438290C00AE7345 /* AddCountrySheet.swift */; };
 		DAE5645E2438293B00AE7345 /* CountryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5645D2438293B00AE7345 /* CountryDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		DA1AEDA7243543A5003A8C0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA1AEDB7243696D1003A8C0B /* CountriesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesController.swift; sourceTree = "<group>"; };
 		DA1AEDB924369731003A8C0B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		DAC5E383249837B100AE34F6 /* StandardExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardExtensions.swift; sourceTree = "<group>"; };
 		DAE5645B2438290C00AE7345 /* AddCountrySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCountrySheet.swift; sourceTree = "<group>"; };
 		DAE5645D2438293B00AE7345 /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 				DAE5645B2438290C00AE7345 /* AddCountrySheet.swift */,
 				DA1AEDB7243696D1003A8C0B /* CountriesController.swift */,
 				DA1AEDB924369731003A8C0B /* Country.swift */,
+				DAC5E383249837B100AE34F6 /* StandardExtensions.swift */,
 				DA0A045924393DD8002BC444 /* Config.swift */,
 				DA1AED9C243543A5003A8C0B /* HostingController.swift */,
 				DA1AED9E243543A5003A8C0B /* ExtensionDelegate.swift */,
@@ -288,6 +291,7 @@
 				DA1AEDB8243696D1003A8C0B /* CountriesController.swift in Sources */,
 				DA1AED9D243543A5003A8C0B /* HostingController.swift in Sources */,
 				DAE5645E2438293B00AE7345 /* CountryDetailView.swift in Sources */,
+				DAC5E384249837B100AE34F6 /* StandardExtensions.swift in Sources */,
 				DA1AEDA1243543A5003A8C0B /* ComplicationController.swift in Sources */,
 				DA1AED9B243543A5003A8C0B /* CountriesListView.swift in Sources */,
 				DA1AED9F243543A5003A8C0B /* ExtensionDelegate.swift in Sources */,

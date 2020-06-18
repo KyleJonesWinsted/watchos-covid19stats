@@ -20,28 +20,28 @@ struct CountryDetailView: View {
             HStack {
                 VStack(alignment: .trailing) {
                     CountryDetailRow(statName: "Active Cases",
-                                     statValue: country.cases?.active?.withCommas() ?? "--",
+                                     statValue: country.cases?.active?.withCommas(),
                                      statNameColor: .yellow)
                     CountryDetailRow(statName: "Total Cases",
-                                     statValue: country.cases?.total?.withCommas() ?? "--",
+                                     statValue: country.cases?.total?.withCommas(),
                                      statNameColor: .white)
                     CountryDetailRow(statName: "New Cases",
-                                     statValue: country.cases?.new ?? "--",
+                                     statValue: country.cases?.new,
                                      statNameColor: .blue)
                     CountryDetailRow(statName: "Critical Condition",
-                                     statValue: country.cases?.critical?.withCommas() ?? "--",
+                                     statValue: country.cases?.critical?.withCommas(),
                                      statNameColor: .orange)
                     CountryDetailRow(statName: "Recovered",
-                                     statValue: country.cases?.recovered?.withCommas() ?? "--",
+                                     statValue: country.cases?.recovered?.withCommas(),
                                      statNameColor: .green)
                     CountryDetailRow(statName: "Total Deaths",
-                                     statValue: country.deaths?.total?.withCommas() ?? "--",
+                                     statValue: country.deaths?.total?.withCommas(),
                                      statNameColor: .red)
                     CountryDetailRow(statName: "New Deaths",
-                                     statValue: country.deaths?.new ?? "--",
+                                     statValue: country.deaths?.new,
                                      statNameColor: .pink)
                     CountryDetailRow(statName: "Tests Done",
-                                     statValue: country.tests?.total?.withCommas() ?? "--",
+                                     statValue: country.tests?.total?.withCommas(),
                                      statNameColor: .purple)
                     Spacer()
                 }
@@ -59,19 +59,23 @@ struct CountryDetailView: View {
 
 struct CountryDetailRow: View {
     var statName: String
-    var statValue: String
+    var statValue: String?
     var statNameColor: Color
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(statName)
-                .font(.subheadline)
-                .foregroundColor(statNameColor)
-            Text(statValue)
-                .font(.title)
-                .padding(.bottom, -20)
-            Divider()
-        }
+        let value = statValue ?? "--"
+        
+        return (
+            VStack(alignment: .leading) {
+                Text(statName)
+                    .font(.subheadline)
+                    .foregroundColor(statNameColor)
+                Text(value)
+                    .font(value.count < 10 ? .title : .headline)
+                    .padding(.bottom, value.count < 10 ? -20 : 0)
+                Divider()
+            }
+        )
         
     }
 }

@@ -25,27 +25,7 @@ class Country: NSObject, URLSessionDownloadDelegate {
     }
     var shortActiveCases: String? {
         guard let activeCases = self.cases?.active else { return nil }
-        let cases = Double(activeCases)
-        switch activeCases {
-        case 0...999:
-            return String(activeCases)
-        case 1000...9999:
-            return String(format: "%.2f", cases / 1000.0) + "K"
-        case 10000...99999:
-            return String(format: "%.1f", cases / 1000.0) + "K"
-        case 100000...999999:
-            return String(Int(cases / 1000)) + "K"
-        case 1000000...9999999:
-            return String(format: "%.2f", cases / 1000000.0) + "M"
-        case 10000000...99999999:
-            return String(format: "%.1f", cases / 1000000.0) + "M"
-        case 100000000...999999999:
-            return String(Int(cases / 1000000)) + "M"
-        case 1000000000...Int.max:
-            return String(format: "%.2f", cases / 1000000000) + "B"
-        default:
-            return String(activeCases)
-        }
+        return activeCases.shortFormat()
     }
     
     var pendingBackgroundTasks = [WKURLSessionRefreshBackgroundTask]()
@@ -190,12 +170,4 @@ struct Tests: Codable {
 
 enum NetworkError: Error {
     case badResponseCode(URLResponse?)
-}
-
-extension Int {
-    func withCommas() -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = NumberFormatter.Style.decimal
-        return numberFormatter.string(from: NSNumber(value:self))!
-    }
 }
